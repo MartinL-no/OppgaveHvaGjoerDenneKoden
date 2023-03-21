@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace OppgaveHvaGjoerDenneKoden
 {
@@ -13,17 +14,23 @@ namespace OppgaveHvaGjoerDenneKoden
             {
                 text = Console.ReadLine();
                 string lowerCasedText = text.ToLowerInvariant();
-                
+
                 foreach (var character in lowerCasedText ?? string.Empty)
                 {
                     counts[(int)character]++;
                 }
+                
+                int total = counts.Sum();
+                Console.WriteLine("total: " + total);
+                
                 for (var i = 0; i < range; i++)
                 {
                     if (counts[i] > 0)
                     {
                         var character = (char)i;
-                        Console.WriteLine(character + " - " + counts[i]);
+                        var average = (float) counts[i] / total * 100;
+                        
+                        Console.WriteLine(character + " - " + average + "%");
                     }
                 }
             }
