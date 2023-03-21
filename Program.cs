@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace OppgaveHvaGjoerDenneKoden
 {
@@ -21,18 +22,27 @@ namespace OppgaveHvaGjoerDenneKoden
                 }
                 
                 int total = counts.Sum();
-                Console.WriteLine("total: " + total);
                 
                 for (var i = 0; i < range; i++)
                 {
                     if (counts[i] > 0)
                     {
                         var character = (char)i;
-                        var average = (float) counts[i] / total * 100;
+                        var average = Math.Round((float) counts[i] / total * 100);
+                        string averageText = average.ToString() + "%";
                         
-                        Console.WriteLine(character + " - " + average + "%");
+                        Console.WriteLine(character + " - " + JustifyText(averageText));
                     }
                 }
+                static string JustifyText(string text)
+                {
+                    string spaces = "";
+                    for (int i = text.Length; i < 4; i++)
+                    {
+                        spaces += " ";
+                    }
+                    return spaces + text;
+                }    
             }
         }
     }
